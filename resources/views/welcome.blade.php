@@ -21,6 +21,29 @@
             Gender:<input v-model="gender">
             City:<input v-model="city">
             <button v-on:click="search">Search</button>
+            <br>
+            <table>
+                <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th> 
+                    <th>Current Job Title</th>
+                    <th>Current Company</th>
+                    <th>Gender</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="row in data">
+                        <td>@{{ row.firstname }}</td>
+                        <td>@{{ row.lastname }}</td>
+                        <td>@{{ row.current_job_title }}</td>
+                        <td>@{{ row.current_company.name }}</td>
+                        <td>@{{ row.gender }}</td>
+                        <td>@{{ row.location }}</td>
+                </tr>
+            </tbody>
+            </table>
         </div>
         <script
       src="https://code.jquery.com/jquery-3.5.1.min.js"

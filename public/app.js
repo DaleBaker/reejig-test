@@ -1,4 +1,3 @@
-
 var header = new Vue({
   el: '#headerRenamed',
   data: {
@@ -12,26 +11,28 @@ var app6 = new Vue({
     name: '',
     gender:'',
     city: '',
+    data: ''
   },
   methods: {
     search: function () {
-    let blanValueString = "blankValue";
+      let blanValueString = "blankValue";
 
-    var name = (this.name == '')
-      ? blanValueString
-      : this.name;
-    var gender = (this.gender == '')
-      ? blanValueString
-      : this.gender;
-    var city = (this.city == '')
-      ? blanValueString
-      : this.city;
+      var name = (this.name == '')
+        ? blanValueString
+        : this.name;
+      var gender = (this.gender == '')
+        ? blanValueString
+        : this.gender;
+      var city = (this.city == '')
+        ? blanValueString
+        : this.city;
 
-    let url = "http://127.0.0.1:8000/getContacts/" + name + "/" + gender + "/" + city;
-    console.log(url);
-		$.get(url, function( data ) {
-			console.log(data);
-		});
+      let url = "http://127.0.0.1:8000/getContacts/" + name + "/" + gender + "/" + city;
+
+      let that = this;
+  		$.get(url, function( data ) {
+        that.data = data;
+  		});
     }
   }
 })
