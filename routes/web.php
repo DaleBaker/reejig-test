@@ -47,12 +47,19 @@ Route::get('/getContacts/{name?}/{gender?}/{city?}', function ($name = NULL, $ge
 	foreach($response["contacts"] as $contact){
 	  //error_log(print_r($contact, true));;
 		$latestExperience = getLatestExperience($contact["experiences"]);
-		error_log(print_r($latestExperience, true));;
 		$contact["current_company"] = $latestExperience["company"];
 		$contact["current_job_title"] = $latestExperience["job_title"];
+
+		if ($name != NULL && (strtolower($name) != strtolower($contact["firstname"]) && strtolower($name) != strtolower($contact["lastname"]))) {
+			continue;
+		}
+		if ($gender != NULL && strtolower($gender) != strtolower($contact["gender"])) {
+			continue;
+		}		
+		if ($city != NULL && strtolower($city) != strtolower($contact["city"])) {
+			continue;
+		}
 		array_push($responseObject,$contact);
-
-
 	}
 
 
