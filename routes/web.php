@@ -32,13 +32,14 @@ function getLatestExperience($eperiences) {
   
 }
 
-Route::get('/getContacts/{name?}/{gender?}/{city?}', function ($name = NULL, $gender = NULL, $city = NULL) {
+Route::get('/getContacts/{name?}/{gender?}/{city?}', function ($name, $gender, $city) {
 	$allString = 'all';
 
 	error_log("yeah");
 	error_log($name);
 	error_log($gender);
 	error_log($city);
+    $blanValueString = "blankValue";
 
 
 	$response = Http::get('https://s3-ap-southeast-2.amazonaws.com/reejig.com/code-test/data.json');	
@@ -50,13 +51,13 @@ Route::get('/getContacts/{name?}/{gender?}/{city?}', function ($name = NULL, $ge
 		$contact["current_company"] = $latestExperience["company"];
 		$contact["current_job_title"] = $latestExperience["job_title"];
 
-		if ($name != NULL && (strtolower($name) != strtolower($contact["firstname"]) && strtolower($name) != strtolower($contact["lastname"]))) {
+		if ($name != $blanValueString && (strtolower($name) != strtolower($contact["firstname"]) && strtolower($name) != strtolower($contact["lastname"]))) {
 			continue;
 		}
-		if ($gender != NULL && strtolower($gender) != strtolower($contact["gender"])) {
+		if ($gender != $blanValueString && strtolower($gender) != strtolower($contact["gender"])) {
 			continue;
 		}		
-		if ($city != NULL && strtolower($city) != strtolower($contact["city"])) {
+		if ($city != $blanValueString && strtolower($city) != strtolower($contact["city"])) {
 			continue;
 		}
 		array_push($responseObject,$contact);

@@ -9,16 +9,27 @@ var header = new Vue({
 var app6 = new Vue({
   el: '#app-6',
   data: {
-    name: 'there',
-    gender: 'here',
-    city: 'c!',
+    name: '',
+    gender:'',
+    city: '',
   },
   methods: {
     search: function () {
-		console.log(this.name);
-		console.log(this.gender);
-		console.log(this.city);
-		$.get( "http://127.0.0.1:8000/getContacts/", function( data ) {
+    let blanValueString = "blankValue";
+
+    var name = (this.name == '')
+      ? blanValueString
+      : this.name;
+    var gender = (this.gender == '')
+      ? blanValueString
+      : this.gender;
+    var city = (this.city == '')
+      ? blanValueString
+      : this.city;
+
+    let url = "http://127.0.0.1:8000/getContacts/" + name + "/" + gender + "/" + city;
+    console.log(url);
+		$.get(url, function( data ) {
 			console.log(data);
 		});
     }
