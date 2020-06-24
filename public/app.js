@@ -1,6 +1,6 @@
 
 var header = new Vue({
-  el: '#header',
+  el: '#headerRenamed',
   data: {
     message: 'Some header.'
   }
@@ -9,8 +9,8 @@ var header = new Vue({
 var app6 = new Vue({
   el: '#app-6',
   data: {
-    name: 'a!',
-    gender: 'b!',
+    name: 'there',
+    gender: 'here',
     city: 'c!',
   },
   methods: {
