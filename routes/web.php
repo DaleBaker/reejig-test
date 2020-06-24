@@ -42,14 +42,20 @@ Route::get('/getContacts/{name?}/{gender?}/{city?}', function ($name = NULL, $ge
 
 
 	$response = Http::get('https://s3-ap-southeast-2.amazonaws.com/reejig.com/code-test/data.json');	
-	//error_log(print_r($response["contacts"], true));;
+	$responseObject = array();
 
 	foreach($response["contacts"] as $contact){
 	  //error_log(print_r($contact, true));;
 		$latestExperience = getLatestExperience($contact["experiences"]);
 		error_log(print_r($latestExperience, true));;
+		$contact["current_company"] = $latestExperience["company"];
+		$contact["current_job_title"] = $latestExperience["job_title"];
+		array_push($responseObject,$contact);
+
 
 	}
 
-    return $response;
+
+
+    return $responseObject;
 });
