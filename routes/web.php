@@ -17,6 +17,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+function getLatestExperience($eperiences) {
+
+	$latestExperience = NULL;
+	foreach($eperiences as $eperience){
+	  if ($latestExperience == NULL || 
+	  		$latestExperience['from_year'] < $eperience['from_year'] || 
+	  		($latestExperience['from_year'] == $eperience['from_year'] && $latestExperience['from_month'] < $eperience['from_month'])) {
+	  	$latestExperience = $eperience;
+	  }
+
+	}
+	return $latestExperience;
+  
+}
+
 Route::get('/getContacts/{name?}/{gender?}/{city?}', function ($name = NULL, $gender = NULL, $city = NULL) {
 	$allString = 'all';
 
@@ -26,7 +41,15 @@ Route::get('/getContacts/{name?}/{gender?}/{city?}', function ($name = NULL, $ge
 	error_log($city);
 
 
-	$response = Http::get('https://s3-ap-southeast-2.amazonaws.com/reejig.com/code-test/data.json');
+	$response = Http::get('https://s3-ap-southeast-2.amazonaws.com/reejig.com/code-test/data.json');	
+	//error_log(print_r($response["contacts"], true));;
+
+	foreach($response["contacts"] as $contact){
+	  //error_log(print_r($contact, true));;
+		$latestExperience = getLatestExperience($contact["experiences"]);
+		error_log(print_r($latestExperience, true));;
+
+	}
 
     return $response;
 });
