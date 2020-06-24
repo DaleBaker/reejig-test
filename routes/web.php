@@ -17,8 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/getContacts/{name?}/{gender?}/{city?}', function ($name = NULL, $gender = NULL, $city = NULL) {
+	$allString = 'all';
 
-Route::get('/yeet', function () {
+	error_log("yeah");
+	error_log($name);
+	error_log($gender);
+	error_log($city);
+
+
 	$response = Http::get('https://s3-ap-southeast-2.amazonaws.com/reejig.com/code-test/data.json');
 
     return $response;
