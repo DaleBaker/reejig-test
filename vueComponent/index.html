@@ -11,10 +11,16 @@
     <title>Vue App</title>
   </head>
 
-  <body>
-    <div id="app">{{message}}</div>
-
-    <script type='text/javascript' src='./app.js'></script>
-
+	<body>
+		<div id="header">
+			<h2>{{message}}</h2>
+		</div>
+		<div id="app-6">
+			Name:<input v-model="name">
+			Gender:<input v-model="gender">
+			City:<input v-model="city">
+			<button v-on:click="search">Search</button>
+		</div>
+	    <script type='text/javascript' src='./app.js'></script>
   </body>
 </html>
